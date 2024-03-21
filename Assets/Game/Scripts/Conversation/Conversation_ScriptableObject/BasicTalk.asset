@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 808f2620215c242f9b5289e5b964df0f, type: 3}
+  m_Name: BasicTalk
+  m_EditorClassIdentifier: 
+  talks:
+  - name: NPC
+    text: Cheers!
+  - name: Player
+    text: 'Nice to meet you. '
+  - name: NPC
+    text: Is it new to here?
+  - name: Player
+    text: 'Yeah! looking for stuff so great. '
+  - name: NPC
+    text: 'I probably have something for you.
+
+      it''s like a survival game where
+      you should  be from kind of threat.
+
+      Do you want to try it? '
+  selection: {fileID: 11400000, guid: f4324f5d814fa45778c0effa93784b90, type: 2}

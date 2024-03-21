@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa12741d5e8344d13ba6bfd92b9ea997, type: 3}
+  m_Name: BasicSelection
+  m_EditorClassIdentifier: 
+  selectionUnits:
+  - name: Yes
+    conversation: {fileID: 11400000, guid: d56c3bed7799c43a4928d30fb2565919, type: 2}
+    isOpen: 1
+  - name: No
+    conversation: {fileID: 11400000, guid: 8c0308e8561654681b9118a09fe8d701, type: 2}
+    isOpen: 0
+  description: Question
