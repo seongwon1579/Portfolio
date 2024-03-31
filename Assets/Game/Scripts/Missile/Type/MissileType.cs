@@ -26,7 +26,7 @@ namespace Missile
             if (other.TryGetComponent(out IHeatable heatable))
                 heatable.Heat(atk);
 
-            projectable.Enqueue();               
-        }      
+                         
+        }
     }
 }

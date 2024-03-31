@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
-using System;
 
-namespace Missile
+public class GameSceneStarter : MonoBehaviour
 {
-    public class Projectable : MonoBehaviour 
+    private void Start()
     {
         
-    
     }
+
 }

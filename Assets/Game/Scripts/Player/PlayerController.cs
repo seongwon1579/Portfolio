@@ -78,4 +78,8 @@ public class PlayerController : MonoBehaviour, IHeatable, IGrativity
         }
     }
 
+    public void Func()
+    {
+        
+    }
 }
