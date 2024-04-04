@@ -2,9 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
+using Zenject;
 
 public class PlayerController : MonoBehaviour, IHeatable, IGrativity
 {
+    private SignalBus signalBus;
+    private HPBar hPBar;
+
+    [Inject]
+    private void Construct(SignalBus signalBus, HPBar hPBar)
+    {
+        this.signalBus = signalBus;
+        this.hPBar = hPBar;
+    }
 
     [Header("Settings"), SerializeField]
     private EventsBundle eventsBundle;
@@ -15,6 +25,8 @@ public class PlayerController : MonoBehaviour, IHeatable, IGrativity
     [SerializeField]
     private AttackInteractor attackInteractor;
 
+    private ReactiveCommand gameOverCommand = new ReactiveCommand();
+
     private float maxHp;
 
     private float hp;
@@ -24,25 +36,48 @@ public class PlayerController : MonoBehaviour, IHeatable, IGrativity
         set
         {
             hp = value;
-            UIController.uIController.ApplyRealtimeHp(hp, maxHp);
-                      
+            hPBar.ApplyRealtimeHp(hp, maxHp);
+            eventsBundle.actionArgNone();
+
             if (hp <= 0)
             {
                 eventsBundle.actionArgInt((int)Audio_Clip.Die);
-                playerState.EndGameCommmand.Execute();
-
+                gameOverCommand.Execute();
             }
         }
     }
 
     public void Heat(float dmg)
     {
-        eventsBundle.actionArgNone();
         eventsBundle.actionArgInt((int)Audio_Clip.Heat);
         Hp -= dmg;
     }
-    
-    public void Set(Character player)
+
+    private void Awake()
+    {
+        SetEvents();
+    }
+
+    private void SetEvents()
+    {
+        gameOverCommand.Subscribe(_ =>
+        {
+            playerState.changeStateReactiveCommand.Execute(playerStates.DieState);
+            signalBus.TryFire(new GameOverSignal());
+        });
+    }
+
+    // 잠시 플레이어 설정 
+    private void Start()
+    {
+        Character player = new Character();
+        player.Hp = 30;
+        player.MaxHp = 30;
+        player.MoveSpeed = 10;
+        PlayerStart(player);
+    }
+
+    public void PlayerStart(Character player)
     {
         Hp = player.Hp;
         maxHp = player.MaxHp;
@@ -56,6 +91,8 @@ public class PlayerController : MonoBehaviour, IHeatable, IGrativity
             attackInteractor.Set(player);
     }
 
+
+    // 컴포넌트로 분리 필요 
     public void ApplyGravity()
     {
         StartCoroutine(GravityCo());
@@ -76,10 +113,5 @@ public class PlayerController : MonoBehaviour, IHeatable, IGrativity
             }
             yield return null;
         }
-    }
-
-    public void Func()
-    {
-        
     }
 }

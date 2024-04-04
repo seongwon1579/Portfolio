@@ -11,8 +11,6 @@ public class PlayerState : MonoBehaviour
 
     public ReactiveCommand<playerStates> changeStateReactiveCommand;
 
-    public ReactiveCommand EndGameCommmand;
-
     private StateMachine<PlayerState> stateMachine;
 
     private State<PlayerState>[] states;
@@ -30,7 +28,6 @@ public class PlayerState : MonoBehaviour
         stateMachine = new StateMachine<PlayerState>();
 
         changeStateReactiveCommand = new ReactiveCommand<playerStates>();
-        EndGameCommmand = new ReactiveCommand();
 
         SetEvents();
     }
@@ -41,18 +38,17 @@ public class PlayerState : MonoBehaviour
         {
             stateMachine.ChangeState(states[(int)newState]);
         });
-
-        EndGameCommmand.Subscribe(_ =>
-        {
-            changeStateReactiveCommand.Execute(playerStates.DieState);
-            GameManager.Instance.EndGame();         
-        });
     }
 
     public void Set(Character character)
     {
         MoveSpeed = character.MoveSpeed;
         SetStates();
+    }
+
+    private void Start()
+    {
+
     }
 
     private void SetStates()
