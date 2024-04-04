@@ -6,7 +6,6 @@ public class MissileInstaller : MonoInstaller
     public GameObject HommingProjecter;
     public GameObject ForwardProjecter;
     public PlayerController target;
-    public GameObject starter;
 
     public override void InstallBindings()
     {
@@ -23,6 +22,5 @@ public class MissileInstaller : MonoInstaller
             .UnderTransformGroup("Pool"));
 
         Container.BindInstance(target).AsSingle();
-        Container.BindInstance(starter).AsSingle();
     }
 }

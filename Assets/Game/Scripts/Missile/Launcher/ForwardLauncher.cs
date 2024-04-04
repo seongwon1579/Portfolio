@@ -18,12 +18,20 @@ public class ForwardLauncher : MonoBehaviour
 
     private void Start()
     {
-        ProjectableSetting setting = new ProjectableSetting();
-        setting.StartPoint = LaunchTransform.position;
 
-        var missile = forwardProjecter.Create(setting);
-        missile.Project();
+        StartCoroutine(Func());
        
     }
 
+    IEnumerator Func()
+    {
+        while (true)
+        {
+            ProjectableSetting setting = new ProjectableSetting();
+            setting.StartPoint = LaunchTransform.position;
+            var missile = forwardProjecter.Create(setting);
+            missile.Project();
+            yield return new WaitForSeconds(1f);
+        }
+    }
 }

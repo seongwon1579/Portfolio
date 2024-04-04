@@ -1,18 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class HomingLauncher : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private HomingProjecter.HomingProjecterFactroy homingProjecter;
+
+    [Inject]
+    private void Consturct(HomingProjecter.HomingProjecterFactroy homingProjecter)
     {
-        
+        this.homingProjecter = homingProjecter;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

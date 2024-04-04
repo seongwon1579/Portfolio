@@ -36,7 +36,7 @@ public class MoveState_Player : State<PlayerState>
 
     public override void Enter(PlayerState owner)
     {
-        owner.animator.SetBool("IsMove", true);
+        owner.animator.SetBool("IsRun", true);
         characterController = owner.characterController;
     }
 
@@ -52,7 +52,7 @@ public class MoveState_Player : State<PlayerState>
     public override void End(PlayerState owner)
     {
         characterController.Move(Vector3.zero);
-        owner.animator.SetBool("IsMove", false);
+        owner.animator.SetBool("IsRun", false);
     }
 }
 
