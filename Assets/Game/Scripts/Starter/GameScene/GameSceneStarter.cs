@@ -7,10 +7,12 @@ public class GameSceneStarter : MonoBehaviour
 {
     private GameTimer gameTimer;
     private SignalBus signalBus;
+    private GameManager gameManager;
 
     [Inject]
-    private void Construct(GameTimer gameTimer, SignalBus signalBus)
+    private void Construct(GameManager gameManager ,GameTimer gameTimer, SignalBus signalBus)
     {
+        this.gameManager = gameManager;
         this.gameTimer = gameTimer;
         this.signalBus = signalBus;
     }
@@ -27,12 +29,6 @@ public class GameSceneStarter : MonoBehaviour
 
     private void SetEvents()
     {
-        signalBus.Subscribe<GameOverSignal>(GameOver);        
+        signalBus.Subscribe<GameOverSignal>(() => gameManager.SetRecords(gameTimer.TimerText));        
     }
-
-    private void GameOver()
-    {
-        
-    }
-
 }

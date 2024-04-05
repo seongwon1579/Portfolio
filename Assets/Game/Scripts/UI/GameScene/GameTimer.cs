@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 using Cysharp.Threading.Tasks;
 using System.Threading;
@@ -29,12 +28,6 @@ public class GameTimer : MonoBehaviour
     }
 
     private CancellationTokenSource source;
-
-    //private void OnEnable()
-    //{
-    //    source = new CancellationTokenSource();
-    //    TimerAsync().Forget();
-    //}
 
     private void Awake()
     {

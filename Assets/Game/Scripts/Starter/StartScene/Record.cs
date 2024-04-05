@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Zenject;
 
 public class Record : MonoBehaviour
 {
@@ -13,7 +14,14 @@ public class Record : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI[] recordsText;
-    private List<float> records;
+
+    private StartSceneStarter starter;
+
+    [Inject]
+    private void Construct(StartSceneStarter starter)
+    {
+        this.starter = starter;
+    }
 
     private void Awake()
     {
@@ -36,7 +44,8 @@ public class Record : MonoBehaviour
 
     private void ShowRecord()
     {
-        records = GameManager.Instance.records;
+        List<float> records = starter.GetRecords();
+
         if (records == null)
             return;
 
